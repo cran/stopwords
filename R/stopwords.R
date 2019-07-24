@@ -1,7 +1,14 @@
 #' Collection of stopwords in multiple languages
 #'
-#' This function returns stopwords collated for Stopwords ISO library
-#' (\url{https://github.com/stopwords-iso/stopwords-iso}).
+#' @description
+#' This function returns character vectors of stopwords for different languages,
+#' using the
+#' \href{https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes}{ISO-639-1
+#' language codes}, and allows for different sources of stopwords to be defined.
+#'
+#' The default source is the \code{\link[=data_stopwords_snowball]{Snowball}}
+#' stopwords collection but \code{\link[=stopwords-package]{other}} sources are
+#' also available.
 #' @param language specify language of stopwords by ISO 639-1 code
 #' @param source specify a stopwords source. To list the currently
 #' available options, use \code{\link{stopwords_getsources}}.
@@ -15,10 +22,16 @@
 #' @export
 #'
 #' @examples
-#' stopwords('en')
-#' stopwords('de')
+#' stopwords("en")
+#' stopwords("de")
 stopwords <- function(language = "en", source = "snowball") {
   stopwords_options()
+
+  if (length(language) > 1)
+    stop("only one language may be specified")
+
+  if (length(source) > 1)
+    stop("only one source may be specified")
 
   error <- createError(
     default = paste0("Language ", "\"", language, "\" not available in source \"", source, "\"."),
@@ -98,9 +111,6 @@ stopwords_getlanguages <- function(source) {
 #' @keywords internal
 #' @param language_name character; name of a language
 lookup_iso_639_1 <- function(language_name) {
-  if (nchar(language_name) <= 2) {
-    stop("language_name must be the full, English name of the language")
-  }
   language_data <- na.omit(ISOcodes::ISO_639_2[, c("Alpha_2", "Name")])
 
   # remove Norwegian variants
@@ -122,6 +132,7 @@ lookup_iso_639_1 <- function(language_name) {
 # Create consistent error messages
 createError <- function(default, note, message) {
   function(message) {
+    message <- message[1] # ensure that condition is length 1
     msg <- paste0(ifelse(missing(message) || message == "", default, message), "\n", note)
     stop(msg, call. = FALSE)
   }
