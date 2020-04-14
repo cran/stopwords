@@ -4,25 +4,28 @@
 \alias{stopwords}
 \title{Collection of stopwords in multiple languages}
 \usage{
-stopwords(language = "en", source = "snowball")
+stopwords(language = "en", source = "snowball", simplify = TRUE)
 }
 \arguments{
 \item{language}{specify language of stopwords by ISO 639-1 code}
 
 \item{source}{specify a stopwords source. To list the currently
-available options, use \code{\link{stopwords_getsources}}.}
+available options, use \code{\link[=stopwords_getsources]{stopwords_getsources()}}.}
+
+\item{simplify}{logical; if \code{TRUE} return a simple vector, if
+\code{FALSE} return a list if the original word list was nested}
 }
 \value{
-a character vector containing the stopwords
+a character vector containing the stopwords, or a list
+of characters \code{simplify = FALSE}
 }
 \description{
 This function returns character vectors of stopwords for different languages,
-using the
-\href{https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes}{ISO-639-1
-language codes}, and allows for different sources of stopwords to be defined.
+using the \href{https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes}{ISO-639-1 language codes}, and allows for
+different sources of stopwords to be defined.
 
-The default source is the \code{\link[=data_stopwords_snowball]{Snowball}}
-stopwords collection but \code{\link[=stopwords-package]{other}} sources are
+The default source is the \code{\link[=data_stopwords_snowball]{Snowball()}}
+stopwords collection but \code{\link[=stopwords-package]{other()}} sources are
 also available.
 }
 \details{

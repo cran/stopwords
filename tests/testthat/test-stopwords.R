@@ -12,6 +12,9 @@ snowball <- stopwords::data_stopwords_snowball
 stopwordsiso <- stopwords::data_stopwords_stopwordsiso
 misc <- stopwords::data_stopwords_misc
 smart <- stopwords::data_stopwords_smart
+marimo <- stopwords::data_stopwords_marimo
+ancient <- stopwords::data_stopwords_ancient
+nltk <- stopwords::data_stopwords_nltk
 
 test_that("all languages work for source: Snowball", {
   test_data <- create_test_data(snowball, "snowball")
@@ -31,6 +34,16 @@ test_that("all languages work for source: Misc", {
 test_that("all languages work for source: Smart", {
   test_data <- create_test_data(smart, "smart")
   expect_equal(smart, test_data)
+})
+
+test_that("all languages work for source: ancient", {
+  test_data <- create_test_data(ancient, "ancient")
+  expect_equal(ancient, test_data)
+})
+
+test_that("all languages work for source: NLTK", {
+  test_data <- create_test_data(nltk, "nltk")
+  expect_equal(nltk, test_data)
 })
 
 test_that("full name language returns same values", {
@@ -75,3 +88,15 @@ test_that("error conditions work", {
     "only one source may be specified"
   )
 })
+
+test_that("simplify works", {
+  expect_is(stopwords("en", source = "marimo", simplify = TRUE),
+            "character")
+  expect_is(stopwords("en", source = "marimo", simplify = FALSE),
+            "list")
+})
+
+expect_identical(
+  stopwords("zh_tw", source = "marimo"),
+  unlist(stopwords::data_stopwords_marimo$zh_tw, use.names = FALSE)
+)

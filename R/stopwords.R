@@ -2,20 +2,23 @@
 #'
 #' @description
 #' This function returns character vectors of stopwords for different languages,
-#' using the
-#' \href{https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes}{ISO-639-1
-#' language codes}, and allows for different sources of stopwords to be defined.
+#' using the [ISO-639-1 language
+#' codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), and allows for
+#' different sources of stopwords to be defined.
 #'
-#' The default source is the \code{\link[=data_stopwords_snowball]{Snowball}}
-#' stopwords collection but \code{\link[=stopwords-package]{other}} sources are
+#' The default source is the [`Snowball()`][data_stopwords_snowball]
+#' stopwords collection but [`other()`][stopwords-package] sources are
 #' also available.
 #' @param language specify language of stopwords by ISO 639-1 code
 #' @param source specify a stopwords source. To list the currently
-#' available options, use \code{\link{stopwords_getsources}}.
-#' @return a character vector containing the stopwords
+#' available options, use [stopwords_getsources()].
+#' @param simplify logical; if `TRUE` return a simple vector, if
+#' `FALSE` return a list if the original word list was nested
+#' @return a character vector containing the stopwords, or a list
+#' of characters `simplify = FALSE`
 #' @details
 #' The language codes for each stopword list use the two-letter ISO
-#' code from \url{https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes}.
+#' code from <https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>.
 #' For backwards compatibility, the full English names of the stopwords
 #' from the \pkg{quanteda} package may also be used, although these are
 #' deprecated.
@@ -24,7 +27,7 @@
 #' @examples
 #' stopwords("en")
 #' stopwords("de")
-stopwords <- function(language = "en", source = "snowball") {
+stopwords <- function(language = "en", source = "snowball", simplify = TRUE) {
   stopwords_options()
 
   if (length(language) > 1)
@@ -32,11 +35,6 @@ stopwords <- function(language = "en", source = "snowball") {
 
   if (length(source) > 1)
     stop("only one source may be specified")
-
-  error <- createError(
-    default = paste0("Language ", "\"", language, "\" not available in source \"", source, "\"."),
-    note = "See `stopwords_getlanguages` for more information on supported languages."
-  )
 
   # for quanteda compability
   if (missing(source) && tolower(language) == "smart") {
@@ -46,9 +44,14 @@ stopwords <- function(language = "en", source = "snowball") {
     language <- "en"
   }
 
+  error <- create_error(
+    default = paste0("Language ", "\"", language, "\" not available in source \"", source, "\"."),
+    note = "See `?stopwords_getlanguages` for more information on supported languages."
+  )
+
   if (nchar(language) > 2) {
     language <- tryCatch(
-      lookup_iso_639_1(language),
+      lookup_iso_639_1(language, source),
       error = function(message) error(message)
     )
   }
@@ -67,10 +70,10 @@ stopwords <- function(language = "en", source = "snowball") {
   )
 
   if (is.null(words)) {
-    error()
+    error(paste0("Language \"", language, "\" not found."))
   }
 
-  words
+  if (simplify) unlist(words, use.names = FALSE) else words
 }
 
 #' list available stopwords sources
@@ -86,15 +89,15 @@ stopwords_getsources <- function() {
 #' list available stopwords country codes
 #'
 #' Lists the available stopwords country codes for a given stopwords source.
-#' See \url{https://en.wikipedia.org/wiki/ISO_639-1} for details of the language code.
+#' See <https://en.wikipedia.org/wiki/ISO_639-1> for details of the language code.
 #' @param source the source of the stopwords
 #' @export
 stopwords_getlanguages <- function(source) {
   stopwords_options()
 
-  error <- createError(
+  error <- create_error(
     default = paste0("Source \"", source, "\" not found."),
-    note = "See `stopwords_getsources` for a list of all available sources."
+    note = "See `?stopwords_getsources` for a list of all available sources."
   )
 
   tryCatch(
@@ -110,7 +113,8 @@ stopwords_getlanguages <- function(source) {
 #' @importFrom stats na.omit
 #' @keywords internal
 #' @param language_name character; name of a language
-lookup_iso_639_1 <- function(language_name) {
+#' @param source the short name for a language source, e.g. "snowball"
+lookup_iso_639_1 <- function(language_name, source) {
   language_data <- na.omit(ISOcodes::ISO_639_2[, c("Alpha_2", "Name")])
 
   # remove Norwegian variants
@@ -119,7 +123,9 @@ lookup_iso_639_1 <- function(language_name) {
   # match the language to the name
   language_code_index <- grep(language_name, language_data[["Name"]], ignore.case = TRUE)
   if (!length(language_code_index)) {
-    stop()
+    if (!language_name %in% stopwords_getlanguages(source))
+      stop("Language \"", language_name, "\" not found for source \"", source, "\".")
+    language_name
   } else if (length(language_code_index) > 1) {
     message <- paste0("Multiple language codes found for \"", language_name, "\":\n",
                paste0(language_data[language_code_index, 2], collapse = "\n"))
@@ -130,7 +136,7 @@ lookup_iso_639_1 <- function(language_name) {
 }
 
 # Create consistent error messages
-createError <- function(default, note, message) {
+create_error <- function(default, note, message = character(0)) {
   function(message) {
     message <- message[1] # ensure that condition is length 1
     msg <- paste0(ifelse(missing(message) || message == "", default, message), "\n", note)

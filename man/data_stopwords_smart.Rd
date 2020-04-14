@@ -4,11 +4,12 @@
 \name{data_stopwords_smart}
 \alias{data_stopwords_smart}
 \title{stopword lists from the SMART system}
-\format{An object of class \code{list} of length 1.}
+\format{
+An object of class \code{list} of length 1.
+}
 \source{
-The English stopword list is taken from the
-  \href{http://www.ai.mit.edu/projects/jmlr/papers/volume5/lewis04a/a11-smart-stop-list/english.stop}{online appendix 11}
-  of Lewis et. al. (2004).
+The English stopword list is taken from the \href{http://www.ai.mit.edu/projects/jmlr/papers/volume5/lewis04a/a11-smart-stop-list/english.stop}{online appendix 11}
+of Lewis et. al. (2004).
 }
 \description{
 The stopword lists based on the SMART (System for the Mechanical Analysis and
@@ -21,9 +22,7 @@ system developed at Cornell University in the 1960s.
 }
 
 \references{
-Lewis, David D., et al. (2004)
-  "\href{http://www.jmlr.org/papers/volume5/lewis04a/lewis04a.pdf}{Rcv1: A
-  new benchmark collection for text categorization research.}" \emph{Journal
-  of machine learning research} 5: 361-397.
+Lewis, David D., et al. (2004) "\href{http://www.jmlr.org/papers/volume5/lewis04a/lewis04a.pdf}{Rcv1: A new benchmark collection for text categorization research.}"
+\emph{Journal of machine learning research} 5: 361-397.
 }
 \keyword{datasets}
