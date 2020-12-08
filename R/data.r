@@ -20,7 +20,7 @@
 #'   languages, based on the Snowball stemmer's word lists.
 #' @source
 #'   The main stopword lists are taken from the Snowball stemmer project in
-#'   different languages (see <http://snowballstem.org/projects.html>).
+#'   different languages (see <https://snowballstem.org/projects.html>).
 #'
 #'   The stopword lists can be found in <http://snowball.tartarus.org/dist/snowball_all.tgz>.
 #' @seealso [stopwords()]
@@ -47,7 +47,7 @@
 #'   Chandrakant Bhogayata.
 #'
 #'   The Chinese stopwords are taken from the
-#'   [Baidu stopword list](http://www.baiduguide.com/baidu-stopwords/).
+#'   Baidu stopword list (see http://www.baiduguide.com/baidu-stopwords/).
 "data_stopwords_misc"
 
 #' stopword lists from the SMART system
@@ -65,7 +65,7 @@
 #' @references
 #'   Lewis, David D., et al. (2004) "[Rcv1: A new benchmark collection for text
 #'   categorization
-#'   research.](http://www.jmlr.org/papers/volume5/lewis04a/lewis04a.pdf)"
+#'   research.](https://www.jmlr.org/papers/volume5/lewis04a/lewis04a.pdf)"
 #'   *Journal of machine learning research* 5: 361-397.
 "data_stopwords_smart"
 
@@ -90,17 +90,38 @@
 
 #' stopword lists for ancient languages
 #'
-#' Stopword lists for ancient Greek and Latin.  As there is no
-#' 2-letter code for ancient Greek in ISO-639-1, we use "grc" to denote Greek
-#' (as per [ISO-639-3](https://iso639-3.sil.org/code/grc)).
+#' Stopword lists for ancient Greek and Latin.  These lists are far more
+#' extensive than the [Perseus lists][data_stopwords_perseus] for ancient Greek
+#' and Latin from the Perseus Digital Library.
+#'
+#' As there is no 2-letter code for ancient Greek in ISO-639-1, we use "grc" to
+#' denote Greek (as per [ISO-639-3](https://iso639-3.sil.org/code/grc)).
 #' @usage NULL
 #' @section Usage:
 #' `stopwords(language = "grc", source = "ancient")`
 #'
 #' `stopwords(language = "la", source = "ancient")`
-#' @source The [Digital Classicist Wiki](http://wiki.digitalclassicist.org/Main_Page).
-#' See [http://wiki.digitalclassicist.org/Main_Page]().
+#' @source Aurélien Berra, Ancient Greek and Latin stopwords,
+#'   \doi{10.5281/zenodo.1165205}. See
+#'   [https://github.com/aurelberra/stopwords/blob/master/rationale.md]().
+#' @seealso [data_stopwords_perseus]
 "data_stopwords_ancient"
+
+#' stopword lists for ancient languages - Perseus Digital Library
+#'
+#' Stopword lists for ancient Greek and Latin.  As there is no
+#' 2-letter code for ancient Greek in ISO-639-1, we use "grc" to denote Greek
+#' (as per [ISO-639-3](https://iso639-3.sil.org/code/grc)).
+#' @usage NULL
+#' @section Usage:
+#' `stopwords(language = "grc", source = "perseus")`
+#'
+#' `stopwords(language = "la", source = "perseus")`
+#' @source The [Perseus Digital Library](https://www.perseus.tufts.edu/hopper/).
+#' See [https://wiki.digitalclassicist.org/Stopwords_for_Greek_and_Latin]() and
+#' [https://wiki.digitalclassicist.org/Perseus_Digital_Library]().
+"data_stopwords_perseus"
+
 
 #' stopword lists from the Python NLTK library
 #'
