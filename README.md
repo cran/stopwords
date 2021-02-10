@@ -3,11 +3,10 @@
 
 [![CRAN
 Version](https://www.r-pkg.org/badges/version/stopwords)](https://CRAN.R-project.org/package=stopwords)
-[![](https://img.shields.io/badge/devel%20version-2.1-royalblue.svg)](https://github.com/quanteda/stopwords)
-[![Travis-CI Build
-Status](https://travis-ci.org/quanteda/stopwords.svg?branch=master)](https://travis-ci.org/quanteda/stopwords)
-[![Coverage
-status](https://codecov.io/gh/davnn/stopwords/branch/master/graph/badge.svg)](https://codecov.io/github/davnn/stopwords?branch=master)
+[![](https://img.shields.io/badge/devel%20version-2.2-royalblue.svg)](https://github.com/quanteda/stopwords)
+[![R build
+status](https://github.com/quanteda/stopwords/workflows/R-CMD-check/badge.svg)](https://github.com/quanteda/stopwords/actions)
+[![codecov](https://codecov.io/gh/quanteda/stopwords/branch/master/graph/badge.svg)](https://codecov.io/gh/quanteda/stopwords)
 [![Downloads](https://cranlogs.r-pkg.org/badges/stopwords)](https://CRAN.R-project.org/package=stopwords)
 [![Total
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/stopwords?color=orange)](https://CRAN.R-project.org/package=stopwords)
@@ -214,7 +213,7 @@ instance, this would work:
 ``` r
 library("quanteda", warn.conflicts = FALSE)
 ## Package version: 2.9.9000
-## Parallel computing: 12 of 12 threads used.
+## Parallel computing: 8 of 8 threads used.
 ## See https://quanteda.io for tutorials and examples.
 posspronouns <- stopwords::data_stopwords_marimo$en$pronoun$possessive
 posspronouns
@@ -242,25 +241,28 @@ but there is a `char_keep()` for positive selection rather than removal.
 
 ## Adding stopwords to your own package
 
-As of version 1.1, we’ve made it a one-step process to add `stopwords()`
-to your package through a re-export. Simply call `use_stopwords()` like
-this:
+In v2.2, we’ve removed the function `use_stopwords()` because the
+dependency on **usethis** added too many downstream package
+dependencies, and **stopwords** is meant to be a lightweight package.
+
+However it is very easy to add a re-export for `stopwords()` to your
+package by adding this file as `stopwords.R`:
 
 ``` r
-> stopwords::use_stopwords()
-✔ Setting active project to '/Users/me/GitHub/mypackage'
-✔ Adding 'stopwords' to Imports field in DESCRIPTION
-✔ Writing 'R/use-stopwords.R'
-● Run `devtools::document()` to update 'NAMESPACE'
-
-> devtools::document()
-Updating mypackage documentation
-Updating collate directive in  /Users/me/GitHub/mypackage/DESCRIPTION 
-Writing NAMESPACE
-Loading mypackage
-Writing NAMESPACE
-Writing stopwords.Rd
+#' Stopwords
+#'
+#' @description
+#' Return a character vector of stopwords.
+#' See \code{stopwords::\link[stopwords:stopwords]{stopwords()}} for details.
+#' @usage stopwords(language = "en", source = "snowball")
+#' @name stopwords
+#' @importFrom stopwords stopwords
+#' @export
+NULL
 ```
+
+and add `stopwords` to the list of `Imports:` in your `DESCRIPTION`
+file.
 
 ## Contributing
 

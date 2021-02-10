@@ -1,14 +1,13 @@
-e66fc633d84f19f9a135c520e94c116e *DESCRIPTION
+c31826c82303cbdc206e8bac237b6f02 *DESCRIPTION
 e2035a3e1fd73e9b767f404cc74ce48c *LICENSE
-18d39b51917e96ca06c8f4359a606ba2 *NAMESPACE
-d881cd2db324b6dc84f094ab2990e3a1 *NEWS.md
+8d793082294d93133f10c45a3d05ee2f *NAMESPACE
+1c547b86f8d8ddeff46540114b27a7f7 *NEWS.md
 100755a9d6fd44063c1fb2556f3bfc14 *R/data.r
 43ca991032d455753e091cde44682303 *R/stopwords-options.R
 fd4ba9dd24246fd5d64b844aba4dd842 *R/stopwords-package.R
 acda8ec1905963fa9833716cc7c1f21b *R/stopwords.R
-01a02850377a4cfb3ff9286ad6976b4f *R/use_stopwords.R
-91c02309db613f25b5b7d3b83e82b10b *README.md
-efa2a1d779391897dc15d8a2d1db98c0 *build/partial.rdb
+dc093a9b2e50e912d0d9a087d85e640f *README.md
+ce9204c16fd179ca18e61715ebf07098 *build/partial.rdb
 5803a5c48086e09d0267560c8fbf22e9 *data/data_stopwords_ancient.rda
 3678700cc4766f84c765bbcb94eeb607 *data/data_stopwords_marimo.rda
 d95afb8c9c076d3ef90c2f3d691dbd45 *data/data_stopwords_misc.rda
@@ -17,8 +16,7 @@ fa5d195d53771e7c94394cdfb55193bf *data/data_stopwords_perseus.rda
 5c1f616275eaa0df4d0dcae2294efd73 *data/data_stopwords_smart.rda
 6f9dee01dc51f50fb7ac7535966c3055 *data/data_stopwords_snowball.rda
 7e18655c90b9d6713157a8902c23b12d *data/data_stopwords_stopwordsiso.rda
-8e4547cceafa64e10ee429dee2f8eedc *inst/WORDLIST
-784dcb2e9cb9cac37944934638ef8916 *inst/templates/stopwords.R
+ad3c1ada5a2216486b3c9c8323d11ecf *inst/WORDLIST
 a530d1640838333e54206dd79548bb79 *man/data_stopwords_ancient.Rd
 3c115daf762edd407706f6c50f9cda79 *man/data_stopwords_marimo.Rd
 3d991844130f04bf7a1d60e2ff40cb53 *man/data_stopwords_misc.Rd
@@ -33,7 +31,6 @@ feccc91902e9c664ab06e6ffc2ba9c4f *man/stopwords-package.Rd
 a69bb0f48de21cf6a21bf23f5dd47f6d *man/stopwords_getlanguages.Rd
 e8efd964be1cb0a59e3e8ed6b9fb91df *man/stopwords_getsources.Rd
 ed9fe9f942b0f9d85dfcf9bb8a1609f0 *man/stopwords_options.Rd
-d43bf0af0e7bedbf637447231f6eb243 *man/use_stopwords.Rd
 670574dfbdddccbcc667deb69a716631 *tests/lint.R
 e13211108abbd4dce21e9a4374d377d5 *tests/spelling.R
 5ab6a66fdf7275ecfe47f3e958b807f1 *tests/testthat.R
