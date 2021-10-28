@@ -3,10 +3,10 @@
 
 [![CRAN
 Version](https://www.r-pkg.org/badges/version/stopwords)](https://CRAN.R-project.org/package=stopwords)
-[![](https://img.shields.io/badge/devel%20version-2.2-royalblue.svg)](https://github.com/quanteda/stopwords)
+[![](https://img.shields.io/badge/devel%20version-2.3-royalblue.svg)](https://github.com/quanteda/stopwords)
 [![R build
 status](https://github.com/quanteda/stopwords/workflows/R-CMD-check/badge.svg)](https://github.com/quanteda/stopwords/actions)
-[![codecov](https://codecov.io/gh/quanteda/stopwords/branch/master/graph/badge.svg)](https://codecov.io/gh/quanteda/stopwords)
+[![codecov](https://codecov.io/gh/quanteda/stopwords/branch/master/graph/badge.svg)](https://app.codecov.io/gh/quanteda/stopwords)
 [![Downloads](https://cranlogs.r-pkg.org/badges/stopwords)](https://CRAN.R-project.org/package=stopwords)
 [![Total
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/stopwords?color=orange)](https://CRAN.R-project.org/package=stopwords)
@@ -81,7 +81,7 @@ source over the “stopwords-iso” source, for instance.)
 The following languages are currently available:
 
 | Language        | Code | snowball | marimo | nltk | stopwords-iso | Other            |
-| :-------------- | :--- | :------: | :----: | :--: | :-----------: | :--------------- |
+|:----------------|:-----|:--------:|:------:|:----:|:-------------:|:-----------------|
 | Afrikaans       | af   |          |        |      |       ✓       |                  |
 | Arabic          | ar   |          |   ✓    |  ✓   |       ✓       | misc             |
 | Armenian        | hy   |          |        |      |       ✓       |                  |
@@ -128,7 +128,7 @@ The following languages are currently available:
 | Polish          | pl   |          |        |      |       ✓       |                  |
 | Portuguese      | pt   |    ✓     |        |  ✓   |       ✓       |                  |
 | Romanian        | ro   |    ✓     |        |  ✓   |       ✓       |                  |
-| Russian         | ru   |    ✓     |        |  ✓   |       ✓       |                  |
+| Russian         | ru   |    ✓     |   ✓    |  ✓   |       ✓       |                  |
 | Slovak          | sk   |          |        |      |       ✓       |                  |
 | Slovenian       | sl   |          |        |  ✓   |       ✓       |                  |
 | Somali          | so   |          |        |      |       ✓       |                  |
@@ -186,7 +186,7 @@ stopwords::stopwords_getlanguages("snowball")
 ## Modifying stopword lists
 
 It is now possible to edit your own stopword lists, using the
-interactive editor, with functions from the **quanteda** package (\>=
+interactive editor, with functions from the **quanteda** package (>=
 v2.02). For instance to edit the English stopword list for the Snowball
 source:
 
@@ -205,15 +205,17 @@ my_stopwordlist <- quanteda::list_edit(stopwords("en", source = "marimo", simpli
 
 Finally, it’s possible to remove stopwords using pattern matching. The
 default is the easy-to-use [“glob” style
-matching](https://en.wikipedia.org/wiki/Glob_\(programming\)), which is
+matching](https://en.wikipedia.org/wiki/Glob_(programming)), which is
 equivalent to fixed matching when no wildcard characters are used. So to
 remove personal pronouns from the English Snowball word list, for
 instance, this would work:
 
 ``` r
 library("quanteda", warn.conflicts = FALSE)
-## Package version: 2.9.9000
-## Parallel computing: 8 of 8 threads used.
+## Package version: 3.1.0.9000
+## Unicode version: 13.0
+## ICU version: 69.1
+## Parallel computing: 12 of 12 threads used.
 ## See https://quanteda.io for tutorials and examples.
 posspronouns <- stopwords::data_stopwords_marimo$en$pronoun$possessive
 posspronouns
